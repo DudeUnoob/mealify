@@ -8,6 +8,7 @@ import "../public/css/Cards.css"
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { addIngredient } from "../microservices/addIngredient";
 import { getIngredients } from "../microservices/getIngredients";
+axios.defaults.withCredentials = true
 
 export default function Cards() {
   const navigate = useNavigate();

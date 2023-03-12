@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap"
 import {  productionAPIURL } from "../../config/config.json"
-
+axios.defaults.withCredentials = true
 function Register() {
   const [cookies] = useCookies(["cookie-name"]);
   const navigate = useNavigate();

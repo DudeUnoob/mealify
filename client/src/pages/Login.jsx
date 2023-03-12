@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import { Form, Button } from "react-bootstrap"
 import { productionAPIURL } from "../../config/config.json"
-
+axios.defaults.withCredentials = true
 function Login() {
   const [cookies] = useCookies([]);
   const navigate = useNavigate();
