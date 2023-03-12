@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap"
-import { developmentAPIURL, productionAPIURL } from "../../config/config.json"
+import {  productionAPIURL } from "../../config/config.json"
 
 function Register() {
   const [cookies] = useCookies(["cookie-name"]);
