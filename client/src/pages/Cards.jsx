@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { developmentAPIURL, productionAPIURL } from "../../config/config.json"
 
 export default function Cards() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Cards() {
         navigate("/login");
       } else {
         const { data } = await axios.post(
-          "http://localhost:4000",
+          productionAPIURL,
           {},
           {
             withCredentials: true,

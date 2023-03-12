@@ -4,6 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap"
+import { developmentAPIURL, productionAPIURL } from "../../config/config.json"
+
 function Register() {
   const [cookies] = useCookies(["cookie-name"]);
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function Register() {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/register",
+        `${productionAPIURL}/register`,
         {
           ...values,
         },

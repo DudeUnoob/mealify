@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import { Form, Button } from "react-bootstrap"
+import { developmentAPIURL, productionAPIURL } from "../../config/config.json"
 
 function Login() {
   const [cookies] = useCookies([]);
@@ -23,7 +24,7 @@ function Login() {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/login",
+        `${productionAPIURL}/login`,
         {
           ...values,
         },

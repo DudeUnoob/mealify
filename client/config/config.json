@@ -1,0 +1,4 @@
+{
+    "developmentAPIURL":"http://localhost:4000",
+    "productionAPIURL":"https://mealify.dudeunoob.repl.co"
+}
