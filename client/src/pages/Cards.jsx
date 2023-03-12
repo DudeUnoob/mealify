@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {  productionAPIURL } from "../../config/config.json"
 import "../public/css/Cards.css"
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { addIngredient } from "../microservices/addIngredient";
+import { getIngredients } from "../microservices/getIngredients";
 
 export default function Cards() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
+  const ingredientInput = useRef(null)
 
   const [todos, setTodos] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const todoText = e.target.elements.todoText.value;
+     const todoText = e.target.elements.todoText.value;
+    //const todoText = ingredientInput.current.value
     const newTodo = { text: todoText, completed: false };
     setTodos([...todos, newTodo]);
     localStorage.setItem("ingredient-list", JSON.stringify([...todos, newTodo]))
-    e.target.reset();
+     e.target.reset();
+    //ingredientInput.current.value = ""
     addIngredient([...todos, newTodo])
   };
 
@@ -53,14 +57,27 @@ export default function Cards() {
         if (!data.status) {
           removeCookie("jwt");
           navigate("/login");
-        } else
+        } else{
           toast(`Hi ${data.user} 👩‍🍳`, {
             theme: "dark",
           });
+          
+        }
+          
       }
     };
     verifyUser();
   }, [cookies, navigate, removeCookie]);
+
+  useEffect(() => {
+    async function callGetUserIngredients(){
+      const data = await getIngredients()
+      console.log(data)
+      setTodos(data.ingredients)
+    }
+
+    callGetUserIngredients()
+  },[])
 
   const logOut = () => {
     removeCookie("jwt");
@@ -74,8 +91,10 @@ export default function Cards() {
       </div>
       <ToastContainer />
 
-      <div>
-      <h1>Ingredient List</h1>
+<br />
+<br />
+      <div className="ingredientListForm">
+      <h1 style={{textAlign:"center"}}>Ingredient List</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Add Ingredient:
@@ -85,22 +104,31 @@ export default function Cards() {
       </form>
       <ul>
        
-        {/* {todos.map((todo, index) => (
+        {todos.map((todo, index) => (
           <li key={index}>
             
             {todo.text}
-            <button onClick={() => handleDelete(index)}>Delete</button>
+            <Button onClick={() => handleDelete(index)} variant="danger">Delete</Button>
           </li>
-        ))} */}
-        {JSON.parse(localStorage.getItem("ingredient-list")).map((elm ,i) => {
-          return (
-            <li key={i}>
-              {elm.text}
-              <Button variant="danger" onClick={() => handleDelete(i)}>Delete</Button>
-            </li>
-          )
-        })}
+        ))}
+        
       </ul>
+
+      {/* <Form style={{ width:"400px", margin:"0 auto"}} onSubmit={handleSubmit}>
+        <Row className="align-items-center">
+          <Col xs="auto">
+            <Form.Label htmlFor="inlineFormInput" ref={ingredientInput}  visuallyHidden>
+              Add Ingredient
+            </Form.Label>
+            <Form.Control className="mb-2" id="inlineFormInput" placeholder="Add Ingredient"/>
+          </Col>
+          <Col xs="auto">
+          <Button type="submit" className="mb-2">
+            Submit
+          </Button>
+        </Col>
+        </Row>
+      </Form> */}
     </div>
     </>
   );

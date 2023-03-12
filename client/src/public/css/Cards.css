@@ -9,3 +9,16 @@
 li .btn {
     margin: 5px;
 }
+
+.ingredientListForm {
+    margin: 0 auto;
+    width: 400px;
+}
+
+ul {
+    list-style-type: decimal;
+}
+
+li {
+    font-weight: bold;
+}
