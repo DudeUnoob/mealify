@@ -104,3 +104,10 @@ li:nth-child(even) {
   border: 5px solid rgb(21, 127, 177);
   padding: 12px;
 }
+
+@media screen and (max-width: 600px){
+  #list {
+    width: 85%;
+
+  }
+}
