@@ -26,18 +26,21 @@ mongoose
     console.log(err.message);
   });
 
+// app.use(
+//   cors({
+//     origin: ["http://localhost:5173", "https://mealify.vercel.app"],
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   })
+// );
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://mealify.vercel.app"],
+    origin: true,
     methods: ["GET", "POST"],
     credentials: true,
   })
 );
-app.options("*", cors({
-  origin: ["http://localhost:5173", "https://mealify.vercel.app"],
-  methods: ["GET", "POST"],
-  credentials: true,
-}))
+
 app.use(cookieParser());
 
 app.use(express.json());

@@ -1,5 +1,5 @@
 {
-    "developmentAPIURL":"https://mealify.dudeunoob.repl.co",
+    "developmentAPIURL":"http://localhost:4000",
     "productionAPIURL":"https://mealify.dudeunoob.repl.co",
     "temp1":"http://localhost:4000",
     "temp2":"https://mealify.dudeunoob.repl.co"
