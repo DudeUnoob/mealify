@@ -10,10 +10,22 @@ function Login() {
   const [cookies] = useCookies([]);
   const navigate = useNavigate();
   useEffect(() => {
-    if (cookies.jwt) {
-      navigate("/dashboard");
+    // if (cookies.jwt) {
+    //   navigate("/dashboard");
+    // }
+    const verifyUser = async() => {
+      const { data } = await axios.post(productionAPIURL, {
+        token: localStorage.getItem("token")
+      })
+
+      if(data.status == true){
+        navigate('/dashboard')
+      }
     }
-  }, [cookies, navigate]);
+
+    verifyUser()
+  // }, [cookies, navigate]);
+  },[])
 
   const [values, setValues] = useState({ email: "", password: "", username: "" });
   const generateError = (error) =>

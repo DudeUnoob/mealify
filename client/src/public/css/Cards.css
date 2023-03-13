@@ -1,4 +1,4 @@
-.private {
+/* .private {
     text-align: center;
 }
 
@@ -21,4 +21,86 @@ ul {
 
 li {
     font-weight: bold;
+} */
+
+.add-to-list {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+#listForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+input[type="text"] {
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 10px;
+  font-size: 16px;
+  flex: 1;
+}
+
+button[type="submit"] {
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-size: 16px;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#delete-btn {
+    float: right;
+    border: none;
+    background-color: rgb(238, 79, 79);
+    border-radius:5px;
+    font-weight: 500;
+}
+
+#list-item {
+  background-color: #f1f1f1;
+  border: 0.5px solid rgb(255,255,255);
+  padding: 10px;
+}
+
+#list { 
+  width: 600px; 
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 5px solid rgb(21, 127, 177);
+  padding: 12px;
 }

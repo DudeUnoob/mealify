@@ -8,11 +8,17 @@ import "../public/css/Cards.css"
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { addIngredient } from "../microservices/addIngredient";
 import { getIngredients } from "../microservices/getIngredients";
+import { createApi } from "unsplash-js"
 
+const unsplash = createApi({
+  accessKey:"67QcAN0o9CgC2ol5SgUn8iic4rL1QcFFoAOUTZO95EY",
+ 
+})
 
 export default function Cards() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
+  const [imagesArray, setImagesArray] = useState([])
   const ingredientInput = useRef(null)
 
   const [todos, setTodos] = useState([]);
@@ -22,11 +28,13 @@ export default function Cards() {
      const todoText = e.target.elements.todoText.value;
     //const todoText = ingredientInput.current.value
     const newTodo = { text: todoText, completed: false };
+    
     setTodos([...todos, newTodo]);
-    localStorage.setItem("ingredient-list", JSON.stringify([...todos, newTodo]))
+    
      e.target.reset();
     //ingredientInput.current.value = ""
     addIngredient([...todos, newTodo])
+
   };
 
   const handleCheckboxChange = (index) => {
@@ -39,7 +47,7 @@ export default function Cards() {
     const updatedTodos = [...todos];
     updatedTodos.splice(index, 1);
     setTodos(updatedTodos);
-    localStorage.setItem("ingredient-list", JSON.stringify(updatedTodos))
+   
     addIngredient(updatedTodos)
   };
 
@@ -70,11 +78,13 @@ export default function Cards() {
     verifyUser();
   }, [])
   // }, [cookies, navigate, removeCookie]);
-
+  let imgUrl;
   useEffect(() => {
     async function callGetUserIngredients(){
       const data = await getIngredients()
-      console.log(data)
+      let images = []
+      
+      
       setTodos(data.ingredients)
     }
 
@@ -89,7 +99,7 @@ export default function Cards() {
   return (
     <>
       <div className="text-center">
-        <h1>Super Secret Page</h1>
+        <h1>Dashboard</h1>
         <Button onClick={logOut}>Log Out</Button>
       </div>
       <ToastContainer />
@@ -98,22 +108,28 @@ export default function Cards() {
 <br />
       <div className="ingredientListForm">
       <h1 style={{textAlign:"center"}}>Ingredient List</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="listForm">
         <label>
-          Add Ingredient:
-          <input type="text" name="todoText" required />
+          <input type="text" id="list-item" placeholder="Add an Ingredient" name="todoText" required />
+          {/* <Form.Control type="text" id="list-item" name="todoText" required /> */}
         </label>
-        <button type="submit">Add</button>
+        <button type="submit" id="add-button">Add</button>
       </form>
-      <ul>
+      <ul id="list">
        
-        {todos.map((todo, index) => (
-          <li key={index}>
+        {todos.map((todo, index) => {
+          
+          return (
+            <li key={index}>
             
             {todo.text}
-            <Button onClick={() => handleDelete(index)} variant="danger">Delete</Button>
+            <img src={imgUrl}/>
+            <button onClick={() => handleDelete(index)} variant="danger" id="delete-btn">Delete</button>
           </li>
-        ))}
+          )
+
+         
+})}
         
       </ul>
 

@@ -1,18 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card } from "react-bootstrap"
+import "../public/css/Home.css"
+
 
 export default function Home(){
 
     return (
-        <>
-            <div className="container">
-                <Card>
-                    <Card.Body>
-                        <Card.Text>Hello World</Card.Text>
-                    </Card.Body>
-                </Card>
+       
+            <>
+            <div className="text-center">
+                <h2>Welcome to Mealify</h2>
             </div>
-        </>
+            </>
+       
     )
 }
