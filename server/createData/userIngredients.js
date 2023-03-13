@@ -7,7 +7,7 @@ module.exports.userIngredients = async (req, res, next) => {
     try {
         const { ingredients } = req.body
 
-        const token = req.cookies.jwt;
+        const token = req.body.token || req.cookies.jwt;
         if (token) {
             jwt.verify(
                 token,

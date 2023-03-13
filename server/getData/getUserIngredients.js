@@ -6,7 +6,7 @@ module.exports.getUserIngredients = async(req, res, next) => {
 
     try {
        
-        const token = req.cookies.jwt;
+        const token = req.body.token || req.cookies.jwt;
         if (token) {
             jwt.verify(
                 token,

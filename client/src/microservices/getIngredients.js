@@ -3,7 +3,7 @@ import { productionAPIURL } from "../../config/config.json"
 axios.defaults.withCredentials = true
 export const getIngredients = async() => {
     
-    const { data } = await axios.get(`${productionAPIURL}/user/get-ingredients`, { withCredentials: true })
+    const { data } = await axios.post(`${productionAPIURL}/user/get-ingredients`, { token: localStorage.getItem("token") })
 
     return data
 }

@@ -9,6 +9,6 @@ router.post("/", checkUser);
 router.post("/register", register);
 router.post("/login", login);
 router.post('/user/ingredients', userIngredients)
-router.get('/user/get-ingredients', getUserIngredients)
+router.post('/user/get-ingredients', getUserIngredients)
 
 module.exports = router;

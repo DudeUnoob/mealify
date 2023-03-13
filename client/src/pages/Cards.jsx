@@ -8,7 +8,7 @@ import "../public/css/Cards.css"
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { addIngredient } from "../microservices/addIngredient";
 import { getIngredients } from "../microservices/getIngredients";
-axios.defaults.withCredentials = true
+
 
 export default function Cards() {
   const navigate = useNavigate();
@@ -45,14 +45,14 @@ export default function Cards() {
 
   useEffect(() => {
     const verifyUser = async () => {
-      if (!cookies.jwt) {
-        navigate("/login");
-      } else {
+      // if (!cookies.jwt) {
+      //   navigate("/login");
+      // } else {
         const { data } = await axios.post(
           productionAPIURL,
-          {},
+          { token: localStorage.getItem("token") },
           {
-            withCredentials: true,
+            // withCredentials: true,
           }
         );
         if (!data.status) {
@@ -66,9 +66,10 @@ export default function Cards() {
         }
           
       }
-    };
+  //}
     verifyUser();
-  }, [cookies, navigate, removeCookie]);
+  }, [])
+  // }, [cookies, navigate, removeCookie]);
 
   useEffect(() => {
     async function callGetUserIngredients(){
@@ -81,6 +82,7 @@ export default function Cards() {
   },[])
 
   const logOut = () => {
+    localStorage.clear()
     removeCookie("jwt");
     navigate("/login");
   };

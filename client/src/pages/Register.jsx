@@ -5,15 +5,26 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap"
 import {  productionAPIURL } from "../../config/config.json"
-axios.defaults.withCredentials = true
+
 function Register() {
   const [cookies] = useCookies(["cookie-name"]);
   const navigate = useNavigate();
   useEffect(() => {
-    if (cookies.jwt) {
-      navigate("/dashboard");
+    // if (cookies.jwt) {
+    //   navigate("/dashboard");
+    // }
+    const verifyUser = async() => {
+      const { data } = await axios.post(productionAPIURL, {
+        token: localStorage.getItem("token")
+      })
+
+      if(data.status == true){
+        navigate('/dashboard')
+      }
     }
-  }, [cookies, navigate]);
+    verifyUser()
+  },[])
+  // }, [cookies, navigate]);
 
   const [values, setValues] = useState({ email: "", password: "", username: "" });
   const generateError = (error) =>
@@ -28,7 +39,7 @@ function Register() {
         {
           ...values,
         },
-        { withCredentials: true }
+        // { withCredentials: true }
       );
       if (data) {
         if (data.errors) {
@@ -37,6 +48,8 @@ function Register() {
           else if (password) generateError(password);
         } else {
           navigate("/");
+          console.log(data)
+          localStorage.setItem("token", data.token)
         }
       }
     } catch (ex) {
