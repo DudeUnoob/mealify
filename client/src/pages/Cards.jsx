@@ -9,6 +9,7 @@ import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import { addIngredient } from "../microservices/addIngredient";
 import { getIngredients } from "../microservices/getIngredients";
 import { createApi } from "unsplash-js"
+import { onLocalStorageChange } from "../functions/onLocalStorageChange";
 
 const unsplash = createApi({
   accessKey:"67QcAN0o9CgC2ol5SgUn8iic4rL1QcFFoAOUTZO95EY",
@@ -27,13 +28,18 @@ export default function Cards() {
     e.preventDefault();
      const todoText = e.target.elements.todoText.value;
     //const todoText = ingredientInput.current.value
-    const newTodo = { text: todoText, completed: false };
-    
-    setTodos([...todos, newTodo]);
-    
-     e.target.reset();
+    unsplash.search.getPhotos({ query: todoText, page: 1, perPage: 1}).then(res => {
+      const newTodo = { text: todoText, image: res.response.results[0].urls.raw, completed: false };
+      setTodos([...todos, newTodo]);
+      e.target.reset();
     //ingredientInput.current.value = ""
     addIngredient([...todos, newTodo])
+    })
+    
+    
+   
+    
+     
 
   };
 
@@ -80,9 +86,11 @@ export default function Cards() {
   // }, [cookies, navigate, removeCookie]);
   let imgUrl;
   useEffect(() => {
+    onLocalStorageChange()
     async function callGetUserIngredients(){
       const data = await getIngredients()
       let images = []
+      
       
       
       setTodos(data.ingredients)
@@ -123,7 +131,7 @@ export default function Cards() {
             <li key={index}>
             
             {todo.text}
-            <img src={imgUrl}/>
+            <img src={todo.image}/>
             <button onClick={() => handleDelete(index)} variant="danger" id="delete-btn">Delete</button>
           </li>
           )

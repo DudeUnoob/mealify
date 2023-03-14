@@ -15,7 +15,7 @@ export default function NavigationBar(){
               <NavDropdown.Item href="/register">
                 Sign Up
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="/expiry/foods">Expiry Foods</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link

@@ -1,24 +1,19 @@
 /* .private {
     text-align: center;
 }
-
 .card {
    
 }
-
 li .btn {
     margin: 5px;
 }
-
 .ingredientListForm {
     margin: 0 auto;
     width: 400px;
 }
-
 ul {
     list-style-type: decimal;
 }
-
 li {
     font-weight: bold;
 } */
@@ -110,4 +105,22 @@ li:nth-child(even) {
     width: 85%;
 
   }
+}
+
+img {
+    
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 10px;
+  vertical-align: middle;
+  transition: all 0.5s;
+}
+
+img:hover {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  transition: all 0.5s;
+  cursor: pointer;
 }

@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavigationBar from "./components/NavigationBar";
 import { onLocalStorageChange } from "./functions/onLocalStorageChange";
 import Home from "./pages/Home";
+import ExpiryFoods from "./pages/ExpiryFoods";
 export default function App() {
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function App() {
         {/* <Route exact path="/login" element={<Cards />}/> */}
         <Route exact path="/dashboard" element={<Cards />} />
         <Route exact path="/" element={<Home />}/>
+        <Route exact path="/expiry/foods" element={<ExpiryFoods />}/>
       </Routes>
     </BrowserRouter>
   );
