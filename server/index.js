@@ -3,6 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken")
+const User = require("./model/authModel")
+const MealSchema = require("./model/mealModel")
 
 const app = express();
 
@@ -18,6 +21,18 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log("A socket connected with id", socket.id)
+
+  socket.on("get_user", async data => {
+    try {
+      const decode = jwt.verify(data, "mealifyauth")
+      const { email, username } = await User.findById(decode.id)
+      socket.uuid = decode.id
+      socket.emit("get_user_response", { email: email, username: username, uuid: socket.uuid })
+    } catch (e) {
+      console.log(e)
+    }
+    
+  })
 })
 
 

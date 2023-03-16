@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -21,7 +21,6 @@ export default function Cards() {
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const [imagesArray, setImagesArray] = useState([])
   const ingredientInput = useRef(null)
-
   const [todos, setTodos] = useState([]);
 
   const handleSubmit = (e) => {

@@ -1,0 +1,14 @@
+{
+    "username": {
+        "type":"String"
+    },
+    "email": {
+        "type":"String"
+    },
+    "expiresIn": {
+        "type":"Date"
+    },
+    "image": {
+        "type":"String (base64 format most likely)"
+    }
+}

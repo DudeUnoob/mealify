@@ -10,6 +10,7 @@ import NavigationBar from "./components/NavigationBar";
 import { onLocalStorageChange } from "./functions/onLocalStorageChange";
 import Home from "./pages/Home";
 import ExpiryFoods from "./pages/ExpiryFoods";
+import { UserProvider } from "./context/UserContext";
 export default function App() {
 
   useEffect(() => {
@@ -18,7 +19,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
+    <UserProvider>
     <NavigationBar />
+
       <Routes>
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
@@ -27,6 +30,7 @@ export default function App() {
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/expiry/foods" element={<ExpiryFoods />}/>
       </Routes>
+      </UserProvider>
     </BrowserRouter>
   );
 }

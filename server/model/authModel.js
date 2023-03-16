@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
   },
   ingredients: {
     type: Array
+  },
+  meals: {
+    type: Array
   }
 });
 
