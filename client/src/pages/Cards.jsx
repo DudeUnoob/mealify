@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {  productionAPIURL } from "../../config/config.json"
 import "../public/css/Cards.css"
-import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Form, Row, Spinner } from "react-bootstrap";
 import { addIngredient } from "../microservices/addIngredient";
 import { getIngredients } from "../microservices/getIngredients";
 import { createApi } from "unsplash-js"
@@ -22,6 +22,7 @@ export default function Cards() {
   const [imagesArray, setImagesArray] = useState([])
   const ingredientInput = useRef(null)
   const [todos, setTodos] = useState([]);
+  const [loadingState, setLoadingState] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,12 +88,14 @@ export default function Cards() {
   useEffect(() => {
     onLocalStorageChange()
     async function callGetUserIngredients(){
+      setLoadingState(true)
       const data = await getIngredients()
       let images = []
       
       
       
       setTodos(data.ingredients)
+      setLoadingState(false)
     }
 
     callGetUserIngredients()
@@ -122,7 +125,7 @@ export default function Cards() {
         </label>
         <button type="submit" id="add-button">Add</button>
       </form>
-      <ul id="list">
+      <ul id="list" style={{ display: loadingState == true ? "none" : ""}}>
        
         {todos.map((todo, index) => {
           
@@ -139,7 +142,7 @@ export default function Cards() {
 })}
         
       </ul>
-
+    <Spinner style={{textAlign:"center", display: loadingState == true ? "flex" : "none", margin:"0 auto"}}></Spinner>
       {/* <Form style={{ width:"400px", margin:"0 auto"}} onSubmit={handleSubmit}>
         <Row className="align-items-center">
           <Col xs="auto">
