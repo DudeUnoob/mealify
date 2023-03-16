@@ -9,6 +9,9 @@ const MealSchema = require("./model/mealModel")
 
 const app = express();
 
+app.use(express.json({limit: "5mb"}))
+app.use(express.urlencoded({ extended: true, limit: "5mb" }))
+
 const http = require("http")
 const server = http.createServer(app)
 const { Server } = require("socket.io")

@@ -35,24 +35,35 @@ module.exports.createMeal = async (req, res, next) => {
                             //     expiryTime: parseInt(meal.expiryDate)
                             //     //expiryDate: new Date(Date.now() + parseInt(meal.expiryDate))
                             // }).save()
+                           
+                                const docs = await mealModel.find({ email: emaily }).exec()
 
-                            const myDoc = new mealModel({ username: usernamey, email: emaily, meals: meal, expiryTime: parseInt(meal.expiryDate) })
-                            myDoc.save((err, savedDoc) => {
-                                setTimeout(() => {
-                                    mealModel.findByIdAndUpdate(savedDoc._id, { isExpired: true }, { new: true }, (err, updatedDoc) => {
-                                        if(err){
-                                            console.log(err)
-                                        } else {
-                                            console.log("updated doc", updatedDoc)
-                                        }
-                                    })
-                                }, parseInt(meal.expiryDate))
-                            })
-                            return res.json({ status: true, user: user.email, ACTION_TYPE: "UPDATE_MEAL_LIST" })
-                        }
-                        else 
-                        {res.json({ status: false });
-                        next();}
+                                if(docs.some(doc => doc.meals.mealTitle === meal.mealTitle)){
+                                    return res.status(400).send({ message: "You already have a meal with this name!" })
+                                }
+                            
+                           
+                                const myDoc = new mealModel({ username: usernamey, email: emaily, meals: meal, expiryTime: parseInt(meal.expiryDate) })
+                                myDoc.save((err, savedDoc) => {
+                                    setTimeout(() => {
+                                        mealModel.findByIdAndUpdate(savedDoc._id, { isExpired: true }, { new: true }, (err, updatedDoc) => {
+                                            if(err){
+                                                console.log(err)
+                                            } else {
+                                            }
+                                        })
+                                    }, parseInt(meal.expiryDate))
+                                })
+                                res.json({ status: true, user: user.email, ACTION_TYPE: "UPDATE_MEAL_LIST" })
+                                next()
+                            
+                            
+                           
+                       }
+                       else {
+                       res.json({ status: false });
+                       next();
+                       }
                     }
                 }
             );

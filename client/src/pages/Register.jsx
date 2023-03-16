@@ -106,7 +106,7 @@ function Register() {
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" name="email" onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })} />
+        <Form.Control type="email" placeholder="Enter email" maxLength="70" name="email" onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })} />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -114,7 +114,7 @@ function Register() {
 
       <Form.Group className="mb-3" controlId="formBasicUsername">
         <Form.Label>Username</Form.Label>
-        <Form.Control type="text" placeholder="Username" name="username" onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}/>
+        <Form.Control type="text" placeholder="Username" name="username" maxLength="30" onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         
@@ -122,7 +122,7 @@ function Register() {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" name="password" onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}/>
+        <Form.Control type="password" placeholder="Password" maxLength="50" name="password" onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })}/>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         

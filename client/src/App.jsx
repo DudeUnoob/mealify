@@ -11,6 +11,7 @@ import { onLocalStorageChange } from "./functions/onLocalStorageChange";
 import Home from "./pages/Home";
 import ExpiryFoods from "./pages/ExpiryFoods";
 import { UserProvider } from "./context/UserContext";
+
 export default function App() {
 
   useEffect(() => {

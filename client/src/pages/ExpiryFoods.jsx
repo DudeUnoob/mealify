@@ -8,7 +8,7 @@ import socket from '../functions/websocketInstance';
 import { onLocalStorageChange } from '../functions/onLocalStorageChange';
 import { getMeals } from '../microservices/getMeals';
 import { addMeal } from '../microservices/addMeal';
-
+import { ToastContainer, toast } from "react-toastify";
 export default function ExpiryFoods(){
   const [image, setImage] = useState(null)
   const [meals, setMeals] = useState([])
@@ -74,10 +74,18 @@ export default function ExpiryFoods(){
 
         const newMeal = { mealTitle: mealTitle, mealPicture: image, expiryDate: customValue, completed: true }
         //setMeals([...meals, newMeal])
-        event.target.reset()
+        //event.target.reset()
         
-        addMeal(newMeal)
-
+        const data = await addMeal(newMeal)
+        if(data.ACTION_TYPE == "UPDATE_MEAL_LIST"){
+          toast.success(`Successfully created your ${mealTitle} meal!`, {
+            position:"top-right"
+          })
+        } else if(data.status == 400){
+          toast.error(`Looks like you already have a meal with that name!`, {
+            position:"top-right"
+          })
+        }
       }
       return (
         <>
@@ -85,7 +93,7 @@ export default function ExpiryFoods(){
             <Form onSubmit={handleSubmt}>
             <Form.Group className='form-container-title' >
                 <Form.Label>Enter your new meal name!</Form.Label>
-                <Form.Control type='text' id="mealTitle" placeholder='meal name ex: pizza' name="mealTitle" required />
+                <Form.Control type='text' id="mealTitle" maxLength="100" placeholder='meal name ex: pizza' name="mealTitle" required />
             </Form.Group>
             <br />
             <Form.Group className='dropdown'>
@@ -118,6 +126,8 @@ export default function ExpiryFoods(){
             <Button type='submit' style={{width:"100%"}}>Submit</Button>
             {image && <img src={image} alt="Uploaded image" style={{ width: "100%", height: "auto"}} />}
             </Form>
+
+            <ToastContainer />
           </div>
         </>
       )
