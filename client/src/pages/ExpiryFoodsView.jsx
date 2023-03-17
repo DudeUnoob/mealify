@@ -8,6 +8,7 @@ import "../public/css/ExpiryFoodsView.css"
 function ExpiryFoodsView () {
 
     const [userData, setUserData] = useState(null)
+    const [loadingState, setLoadingState] = useState(false)
     
     const data = useUserContext()
    
