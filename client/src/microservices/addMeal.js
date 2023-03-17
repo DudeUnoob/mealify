@@ -11,7 +11,7 @@ export const addMeal = async(meal) => {
         const response = await axios.post(`${productionAPIURL}/user/new-meal`, { meal: meal, token: localStorage.getItem("token") }, {
                 withCredentials: true
              });
-        console.log(response.data);
+       // console.log(response.data);
 
         return response.data
       } catch (error) {
@@ -19,7 +19,7 @@ export const addMeal = async(meal) => {
           //console.log(error.response.data);
           //console.log(error.response.status);
           //console.log(error.response.headers);
-
+          localStorage.clear()
           return error.response
         } else if (error.request) {
 
