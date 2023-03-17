@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useUserContext } from "../context/UserContext"
+import { onLocalStorageChange } from '../functions/onLocalStorageChange';
 import "../public/css/ExpiryFoodsView.css"
 
 
@@ -15,6 +16,9 @@ function ExpiryFoodsView () {
         setUserData(data)
     },[data])
 
+    useEffect(() => {
+        onLocalStorageChange()
+    }, [])
         
        
     return (

@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import { Form, Button } from "react-bootstrap"
 import { productionAPIURL } from "../../config/config.json"
+import { onLocalStorageChange } from "../functions/onLocalStorageChange";
 
 function Login() {
   const [cookies] = useCookies([]);
@@ -13,6 +14,7 @@ function Login() {
     // if (cookies.jwt) {
     //   navigate("/dashboard");
     // }
+    onLocalStorageChange()
     const verifyUser = async() => {
       const { data } = await axios.post(productionAPIURL, {
         token: localStorage.getItem("token")

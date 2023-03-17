@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap"
 import {  productionAPIURL } from "../../config/config.json"
+import { onLocalStorageChange } from "../functions/onLocalStorageChange";
 
 function Register() {
   const [cookies] = useCookies(["cookie-name"]);
@@ -13,6 +14,7 @@ function Register() {
     // if (cookies.jwt) {
     //   navigate("/dashboard");
     // }
+    onLocalStorageChange()
     const verifyUser = async() => {
       const { data } = await axios.post(productionAPIURL, {
         token: localStorage.getItem("token")
