@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
       socket.uuid = decode.id
       socket.emit("get_user_response", { email: email, username: username, uuid: socket.uuid, meals: mealQuery })
     } catch (e) {
-      console.log(e)
+      socket.emit("reset_token", "token_reset")
     }
     
   })

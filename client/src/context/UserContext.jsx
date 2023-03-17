@@ -17,6 +17,9 @@ export function UserProvider({ children }){
           socket.on("get_user_response", data => {
              setUser(data)
            })
+        socket.on("reset_token", (data) => {
+            localStorage.clear()
+        })
     }, [])
 
     return (
