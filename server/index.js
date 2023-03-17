@@ -22,6 +22,7 @@ const io = new Server(server, {
   }
 })
 
+
 io.on("connection", (socket) => {
   console.log("A socket connected with id", socket.id)
 
@@ -29,8 +30,9 @@ io.on("connection", (socket) => {
     try {
       const decode = jwt.verify(data, "mealifyauth")
       const { email, username } = await User.findById(decode.id)
+      const mealQuery = await MealSchema.find({ email: email })
       socket.uuid = decode.id
-      socket.emit("get_user_response", { email: email, username: username, uuid: socket.uuid })
+      socket.emit("get_user_response", { email: email, username: username, uuid: socket.uuid, meals: mealQuery })
     } catch (e) {
       console.log(e)
     }
@@ -78,3 +80,5 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use("/", authRoutes);
+
+module.exports = { io, app }

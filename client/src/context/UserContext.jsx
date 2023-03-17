@@ -4,6 +4,10 @@ import socket from '../functions/websocketInstance';
 
 export const UserContext = createContext()
 
+export function useUserContext() {
+    return useContext(UserContext)
+}
+
 export function UserProvider({ children }){
 
     const [user, setUser] = useState(null)
@@ -12,7 +16,6 @@ export function UserProvider({ children }){
          socket.emit("get_user", localStorage.getItem("token"))
           socket.on("get_user_response", data => {
              setUser(data)
-             console.log(data)
            })
     }, [])
 

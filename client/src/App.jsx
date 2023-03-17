@@ -11,6 +11,7 @@ import { onLocalStorageChange } from "./functions/onLocalStorageChange";
 import Home from "./pages/Home";
 import ExpiryFoods from "./pages/ExpiryFoods";
 import { UserProvider } from "./context/UserContext";
+import ExpiryFoodsView from "./pages/ExpiryFoodsView";
 
 export default function App() {
 
@@ -30,6 +31,7 @@ export default function App() {
         <Route exact path="/dashboard" element={<Cards />} />
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/expiry/foods" element={<ExpiryFoods />}/>
+        <Route exact path="/expiry/foods/view" element={<ExpiryFoodsView />}/>
       </Routes>
       </UserProvider>
     </BrowserRouter>

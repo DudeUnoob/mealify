@@ -17,8 +17,8 @@ export default function NavigationBar(){
               </NavDropdown.Item>
               <NavDropdown.Item href="/expiry/foods">Expiry Foods</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item href="/expiry/foods/view">
+                View Meals/Expiry Tracker
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
