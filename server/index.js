@@ -39,6 +39,18 @@ io.on("connection", (socket) => {
     }
     
   })
+
+  // socket.on("get_realtime_user", async data => {
+  //   try{
+  //     const decode = jwt.verify(data, "mealifyauth")
+  //     const { email, username } = await User.findById(decode.id)
+  //     const mealQuery = await MealSchema.find({ email: email })
+  //     socket.uuid = decode.id
+  //     socket.emit("realtime_user_response", { email: email, username: username, uuid: socket.uuid, meals: mealQuery })
+  //   } catch(e){
+  //     socket.emit("reset_token", "token_reset")
+  //   }
+  // })
 })
 
 server.listen(4000, (err) => {

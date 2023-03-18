@@ -23,6 +23,8 @@ function ExpiryFoodsView () {
     useEffect(() => {
         onLocalStorageChange()
         
+        
+        
     }, [])
         
        

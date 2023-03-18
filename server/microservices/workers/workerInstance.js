@@ -26,8 +26,12 @@ module.exports = setInterval(async() => {
                  socket.uuid = getUUID._id.toString()
                 // console.log(_id)
                 const mealQuery = await mealModel.find({ email: email })
-                socket.emit('get_user_response', { email: email, username: username, uuid: socket.uuid,  meals: mealQuery })
+
+            socket.emit('realtimeUpdate', { email: email, username: username, uuid: socket.uuid,  meals: mealQuery })
+
             }
+
+
         })
     })
 
