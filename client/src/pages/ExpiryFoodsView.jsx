@@ -24,18 +24,22 @@ function ExpiryFoodsView () {
        
     return (
          
-            <Container>
+            <Container fluid>
                 <Row>
             {userData && (
                 userData.meals.map((elm, i) => (
-                    <Col key={i} >
-                    <Card className="bg-dark text-white" style={{ width:"18rem", marginBottom:"0.5rem"}}>
-                        <Card.Img src={elm.meals.mealPicture} className="card_img_meals"  />
-                        <Card.ImgOverlay>
+                    <Col key={i} md >
+                    <Card className="bg-dark text-white" style={{ marginBottom: "0.8rem"}} >
+                    {/* <Card.Img  className="card_img_meals"  /> */}
+
+                            <div className="content" style={{padding:"15px"}}>
                             <Card.Title>{elm.meals.mealTitle}</Card.Title>
                             <Card.Text>Created at: {elm.createdAt}</Card.Text>
-                            <Card.Text>Time remaining: {new Date(elm.createdAt).getTime() - elm.expiryTime}</Card.Text>
-                        </Card.ImgOverlay>
+                            <Card.Text>Expires on: {new Date(new Date(elm.createdAt).getTime() + elm.expiryTime).toString()}</Card.Text>
+                            <img src={elm.meals.mealPicture}/>
+                            </div>
+                            
+                        
                         <Card.Footer>Expired Status: {elm.isExpired.toString()}</Card.Footer>
                     </Card>
                     </Col>

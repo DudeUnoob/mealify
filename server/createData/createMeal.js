@@ -2,6 +2,7 @@ const User = require("../model/authModel")
 const jwt = require("jsonwebtoken")
 const { checkUser } = require("../middlewares/authMiddleware")
 const mealModel = require("../model/mealModel")
+const workerInstance = require("../microservices/workers/workerInstance")
 
 module.exports.createMeal = async (req, res, next) => {
     try {
@@ -43,17 +44,17 @@ module.exports.createMeal = async (req, res, next) => {
                                 }
                             
                            
-                                const myDoc = new mealModel({ username: usernamey, email: emaily, meals: meal, expiryTime: parseInt(meal.expiryDate) })
-                                myDoc.save((err, savedDoc) => {
-                                    setTimeout(() => {
-                                        mealModel.findByIdAndUpdate(savedDoc._id, { isExpired: true }, { new: true }, (err, updatedDoc) => {
-                                            if(err){
-                                                console.log(err)
-                                            } else {
-                                            }
-                                        })
-                                    }, parseInt(meal.expiryDate))
-                                })
+                                const myDoc = new mealModel({ username: usernamey, email: emaily, meals: meal, expiryTime: parseInt(meal.expiryDate) }).save()
+                                // myDoc.save((err, savedDoc) => {
+                                //     setTimeout(() => {
+                                //         mealModel.findByIdAndUpdate(savedDoc._id, { isExpired: true }, { new: true }, (err, updatedDoc) => {
+                                //             if(err){
+                                //                 console.log(err)
+                                //             } else {
+                                //             }
+                                //         })
+                                //     }, parseInt(meal.expiryDate))
+                                // })
                                
                                 
                                 res.json({ status: true, user: user.email, ACTION_TYPE: "UPDATE_MEAL_LIST" })
