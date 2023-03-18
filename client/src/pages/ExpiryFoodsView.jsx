@@ -3,6 +3,9 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useUserContext } from "../context/UserContext"
 import { onLocalStorageChange } from '../functions/onLocalStorageChange';
 import "../public/css/ExpiryFoodsView.css"
+import { productionAPIURL } from "../../config/config.json"
+import io from "socket.io-client"
+const socket = io(productionAPIURL)
 
 
 function ExpiryFoodsView () {
@@ -19,6 +22,7 @@ function ExpiryFoodsView () {
 
     useEffect(() => {
         onLocalStorageChange()
+        
     }, [])
         
        
@@ -45,7 +49,7 @@ function ExpiryFoodsView () {
                     </Col>
                 ))
             )}
-            {console.log(userData)}
+            
             </Row>
             </Container>
         

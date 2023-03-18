@@ -22,6 +22,7 @@ const io = new Server(server, {
   }
 })
 
+var socketInstance1 = require("./microservices/workers/workerInstance")(io)
 
 io.on("connection", (socket) => {
   console.log("A socket connected with id", socket.id)
@@ -79,5 +80,3 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use("/", authRoutes);
-
-module.exports = { io, app }
