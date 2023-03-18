@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-// import socket from '../functions/websocketInstance';
-import io from "socket.io-client"
-import { productionAPIURL } from "../../config/config.json"
-const socket = io(productionAPIURL)
+import socket from '../functions/websocketInstance';
+
 
 export const UserContext = createContext()
 
