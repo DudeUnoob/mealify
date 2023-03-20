@@ -19,7 +19,7 @@ export const addMeal = async(meal) => {
           //console.log(error.response.data);
           //console.log(error.response.status);
           //console.log(error.response.headers);
-          localStorage.clear()
+          //localStorage.clear()
           return error.response
         } else if (error.request) {
 

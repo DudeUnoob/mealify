@@ -100,6 +100,7 @@ export default function ExpiryFoods(){
               <Form.Label>Select when your food expires</Form.Label>
               <Form.Select onChange={handleSelectChange}>
                 <option>None</option>
+                <option value="10000">10 secs</option>
                 <option value="60000">1 minute</option>
                 <option value="604800000">1 week</option>
                 <option value="1209600000">2 weeks</option>

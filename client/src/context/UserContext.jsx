@@ -22,7 +22,9 @@ export function UserProvider({ children }) {
             localStorage.clear()
         })
         //}, 3000)
-
+        setInterval(() => {
+            socket.emit("get_user", localStorage.getItem("token"))
+        }, 3000)
         // setInterval(() => {
         //     socket.emit("get_realtime_user", localStorage.getItem("token"))
 
