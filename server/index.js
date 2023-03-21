@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken")
 const User = require("./model/authModel")
 const MealSchema = require("./model/mealModel")
 const app = express();
-
+const { mongodbConnectionString } = require("./config/config.json")
 app.use(express.json({limit: "5mb"}))
 app.use(express.urlencoded({ extended: true, limit: "5mb" }))
 
@@ -25,7 +25,6 @@ const io = new Server(server, {
 var socketInstance1 = require("./microservices/workers/workerInstance")(io)
 
 io.on("connection", (socket) => {
-  console.log("A socket connected with id", socket.id)
 
   socket.on("get_user", async data => {
     try {
@@ -62,7 +61,7 @@ server.listen(4000, (err) => {
 });
 
 mongoose
-  .connect("mongodb+srv://ZeroX:Balaram26@cluster0.b2lzi.mongodb.net/?retryWrites=true&w=majority", {
+  .connect(mongodbConnectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

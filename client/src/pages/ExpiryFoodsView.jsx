@@ -13,12 +13,12 @@ function ExpiryFoodsView () {
     const [userData, setUserData] = useState(null)
     const [loadingState, setLoadingState] = useState(false)
     
-    const data = useUserContext()
+    const { user } = useUserContext()
    
 
     useEffect(() => {
-        setUserData(data)
-    },[data])
+        setUserData(user)
+    },[user])
 
     useEffect(() => {
         onLocalStorageChange()
