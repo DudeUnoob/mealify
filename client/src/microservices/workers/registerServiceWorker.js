@@ -4,7 +4,7 @@ const key = "BERUJMe1npcebsZ41if7t38zwRlFOvVI-aMjTmaqALo6oTeyTxibVGosy1W40hhi9WO
 
 export default function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/src/service-worker.js')
+        navigator.serviceWorker.register('/service-worker.js')
           .then(registration => {
             console.log('Service worker registered:', registration);
           })

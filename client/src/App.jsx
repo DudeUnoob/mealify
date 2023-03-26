@@ -23,6 +23,10 @@ export default function App() {
 
     socket.on("realtimeUpdate", data => {
       subscribeUser()
+
+      new Notification("Mealify", {
+        body:`Your ${data.updatedMeal.meals.mealTitle} meal has expired!`
+    })
     })
     
   }, [])
