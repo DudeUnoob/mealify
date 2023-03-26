@@ -10,6 +10,23 @@ const app = express();
 const { mongodbConnectionString } = require("./config/config.json")
 app.use(express.json({limit: "5mb"}))
 app.use(express.urlencoded({ extended: true, limit: "5mb" }))
+const webpush = require("web-push")
+
+//Public Key:
+//const publicVapidKey = "BC0yKrpzC_cAu9THj0R3K-MWhMouMdsTCmXzZUiA6uf2rKtBtt_vIXjPF5w66NC2Idh-CavtRkczWTA5T9B8NtA"
+const publicVapidKey = "BERUJMe1npcebsZ41if7t38zwRlFOvVI-aMjTmaqALo6oTeyTxibVGosy1W40hhi9WOJZ3TYfTuS4-gmElYCPuI"
+const privateVapidKey = "kEaMWM21eNGv9TFEYDGwAmrd72yz2RmdCa_qyYZGBEs"
+//Private Key:
+//const privateVapidKey = "bLJSp6r9aULPvRtWmb9UzbNfAm7y4TGoOldrlO3kDVY"
+
+const vapidKeys = {
+  publicKey: publicVapidKey,
+  privateKey: privateVapidKey
+}
+
+webpush.setVapidDetails("mailto:test@test.com", vapidKeys.publicKey, vapidKeys.privateKey)
+
+
 
 const http = require("http")
 const server = http.createServer(app)

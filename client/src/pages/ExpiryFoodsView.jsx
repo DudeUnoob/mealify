@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { useUserContext } from "../context/UserContext"
 import { onLocalStorageChange } from '../functions/onLocalStorageChange';
 import "../public/css/ExpiryFoodsView.css"
 import { productionAPIURL } from "../../config/config.json"
 import io from "socket.io-client"
+import { deleteMeal } from '../microservices/deleteMeal';
 const socket = io(productionAPIURL)
 
 
@@ -23,9 +24,19 @@ function ExpiryFoodsView () {
     useEffect(() => {
         onLocalStorageChange()
         
-        
+        socket.on("get_user_response", async data => {
+            setUserData(data)
+        })
         
     }, [])
+
+    const handleMealDelete = async(docId) => {
+        console.log(docId)
+        const verify = await deleteMeal(docId)
+        if(verify.status == 201){
+            socket.emit("get_user", localStorage.getItem("token"))
+        }
+    }
         
        
     return (
@@ -34,6 +45,7 @@ function ExpiryFoodsView () {
                 <Row>
             {userData && (
                 userData.meals.map((elm, i) => (
+                   
                     <Col key={i} md >
                     <Card className="bg-dark text-white" style={{ marginBottom: "0.8rem"}} >
                     {/* <Card.Img  className="card_img_meals"  /> */}
@@ -45,7 +57,7 @@ function ExpiryFoodsView () {
                             <img src={elm.meals.mealPicture}/>
                             </div>
                             
-                        
+                            <Button style={{ margin:"15px", width: "20%"}} variant="danger" onClick={() => handleMealDelete(elm._id)}>Delete</Button>
                         <Card.Footer>Expired Status: {elm.isExpired.toString()}</Card.Footer>
                     </Card>
                     </Col>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
+import { subscribeUser } from '../components/Notifications';
 import socket from '../functions/websocketInstance';
 
 
@@ -53,9 +54,6 @@ export function UserProvider({ children }) {
             }
             
 
-            new Notification("Mealify", {
-                body:`Your ${data.updatedMeal.meals.mealTitle} meal has expired!`
-            })
             
             // setNotifications([...notifications, data.updatedMeal])
             

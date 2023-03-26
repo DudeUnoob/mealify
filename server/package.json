@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build":"node index.js",
-    "dev":"nodemon index"
+    "build": "node index.js",
+    "dev": "nodemon index"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
     "nodemon": "^2.0.15",
-    "socket.io": "^4.6.1"
+    "socket.io": "^4.6.1",
+    "web-push": "^3.5.0"
   }
 }

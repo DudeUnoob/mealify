@@ -12,11 +12,19 @@ import Home from "./pages/Home";
 import ExpiryFoods from "./pages/ExpiryFoods";
 import { UserProvider } from "./context/UserContext";
 import ExpiryFoodsView from "./pages/ExpiryFoodsView";
-
+import registerServiceWorker from "./microservices/workers/registerServiceWorker";
+import socket from "./functions/websocketInstance";
+import { subscribeUser } from "./components/Notifications";
 export default function App() {
 
   useEffect(() => {
     onLocalStorageChange()
+    registerServiceWorker()
+
+    socket.on("realtimeUpdate", data => {
+      subscribeUser()
+    })
+    
   }, [])
 
   return (
