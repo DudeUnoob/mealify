@@ -40,18 +40,18 @@ export function UserProvider({ children }) {
         
         socket.on("realtimeUpdate", data => {
             
-            const notis = JSON.parse(localStorage.getItem("notifications"))
-            if(!localStorage.getItem("notifications")){
-                console.log(data)
-                setUser(data)
-                localStorage.setItem("notifications", JSON.stringify([data.updatedMeal]))
+            // const notis = JSON.parse(localStorage.getItem("notifications"))
+            // if(!localStorage.getItem("notifications")){
+            //     console.log(data)
+            //     setUser(data)
+            //     localStorage.setItem("notifications", JSON.stringify([data.updatedMeal]))
                 
-            } else {
-                setUser(data)
-                const notis = JSON.parse(localStorage.getItem("notifications"))
-                localStorage.setItem("notifications", JSON.stringify([...notis, data.updatedMeal]))
+            // } else {
+            //     setUser(data)
+            //     const notis = JSON.parse(localStorage.getItem("notifications"))
+            //     localStorage.setItem("notifications", JSON.stringify([...notis, data.updatedMeal]))
                 
-            }
+            // }
             
 
             
